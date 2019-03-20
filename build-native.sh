@@ -7,6 +7,7 @@ _CMakeIOSPlatform=
 _CMakeEnableBitcode=
 _OutputPathPrefix=
 _CMakeBuildTarget=cimgui
+_CMakeImguiStatic=
 
 while :; do
     if [ $# -le 0 ]; then
@@ -26,6 +27,7 @@ while :; do
             _CMakeIOSPlatform=-DIOS_PLATFORM=OS64
             _CMakeEnableBitcode=-DENABLE_BITCODE=0
             _OutputPathPrefix=ios-
+            _CMakeImguiStatic=-DIMGUI_STATIC=1
             ;;
         *)
             __UnprocessedBuildArgs="$__UnprocessedBuildArgs $1"
@@ -38,6 +40,6 @@ _OutputPath=$scriptPath/build/$_OutputPathPrefix$_CMakeBuildType
 
 mkdir -p $_OutputPath
 pushd $_OutputPath
-cmake $scriptPath/cimgui -DCMAKE_BUILD_TYPE=$_CMakeBuildType $_CMakeToolchain $_CMakeIOSPlatform $_CMakeEnableBitcode
+cmake $scriptPath/cimgui -DCMAKE_BUILD_TYPE=$_CMakeBuildType $_CMakeToolchain $_CMakeIOSPlatform $_CMakeEnableBitcode $_CMakeImguiStatic
 cmake --build . --target $_CMakeBuildTarget
 popd
