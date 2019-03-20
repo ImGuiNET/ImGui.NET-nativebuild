@@ -1,19 +1,35 @@
 version: 1.0.{build}
-image:
-- Ubuntu
-- Visual Studio 2017
+
 install:
 - git submodule update --init --recursive
+
+environment:
+  matrix:
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+      _NATIVE_BUILD_ARGS: Release win-x64 --artifact-name build\cimgui.win-x64.dll
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+      _NATIVE_BUILD_ARGS: Release win-x86 --artifact-name build\cimgui.win-x86.dll
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+      _NATIVE_BUILD_ARGS: Release --android-ndk C:\ProgramData\Microsoft\AndroidNDK64\android-ndk-r17 --android-abi arm64-v8a --artifact-name build\cimgui.android-arm64-v8a.so
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+      _NATIVE_BUILD_ARGS: Release --android-ndk C:\ProgramData\Microsoft\AndroidNDK64\android-ndk-r17 --android-abi armeabi-v7a --artifact-name build\cimgui.android-armeabi-v7a.so
+    - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu1804
+
 build_script:
 - sh: ./ci-build.sh
-- cmd: call .\ci-build.cmd
+- cmd: call .\build-native.cmd %_NATIVE_BUILD_ARGS%
+
 artifacts:
-- path: cimgui/build/Release/cimgui.so
+- path: build/Release/cimgui.so
   name: cimgui.so
-- path: cimgui\build\x64\Release\cimgui.win-x64.dll
+- path: build\cimgui.win-x64.dll
   name: cimgui.win-x64.dll
-- path: cimgui\build\x86\Release\cimgui.win-x86.dll
+- path: build\cimgui.win-x86.dll
   name: cimgui.win-x86.dll
+- path: build\cimgui.android-arm64-v8a.so
+  name: cimgui.android-arm64-v8a.so
+- path: build\cimgui.android-armeabi-v7a.so
+  name: cimgui.android-armeabi-v7a.so
 
 deploy:
   release: $(APPVEYOR_REPO_TAG_NAME)

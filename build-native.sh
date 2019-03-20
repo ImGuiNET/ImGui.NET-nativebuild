@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
 
-scriptPath="`dirname \"$0\"`"
-cimguiPath=$scriptPath/cimgui
-
+scriptPath="$( cd "$(dirname "$0")" ; pwd -P )"
 _CMakeBuildType=Debug
+_CMakeToolchain=
+_CMakeIOSPlatform=
+_CMakeEnableBitcode=
+_OutputPathPrefix=
+_CMakeBuildTarget=cimgui
 
 while :; do
     if [ $# -le 0 ]; then
@@ -18,6 +21,12 @@ while :; do
         release|-release)
             _CMakeBuildType=Release
             ;;
+        ios)
+            _CMakeToolchain=-DCMAKE_TOOLCHAIN_FILE=$scriptPath/ios/ios.toolchain.cmake
+            _CMakeIOSPlatform=-DIOS_PLATFORM=OS64
+            _CMakeEnableBitcode=-DENABLE_BITCODE=0
+            _OutputPathPrefix=ios-
+            ;;
         *)
             __UnprocessedBuildArgs="$__UnprocessedBuildArgs $1"
     esac
@@ -25,8 +34,10 @@ while :; do
     shift
 done
 
-mkdir -p $cimguiPath/build/$_CMakeBuildType
-pushd $cimguiPath/build/$_CMakeBuildType
-cmake ../.. -DCMAKE_BUILD_TYPE=$_CMakeBuildType
-make
+_OutputPath=$scriptPath/build/$_OutputPathPrefix$_CMakeBuildType
+
+mkdir -p $_OutputPath
+pushd $_OutputPath
+cmake $scriptPath/cimgui -DCMAKE_BUILD_TYPE=$_CMakeBuildType $_CMakeToolchain $_CMakeIOSPlatform $_CMakeEnableBitcode
+cmake --build . --target $_CMakeBuildTarget
 popd
