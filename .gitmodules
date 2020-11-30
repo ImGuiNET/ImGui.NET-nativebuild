@@ -1,3 +1,12 @@
 [submodule "cimgui"]
 	path = cimgui
 	url = https://github.com/extrawurst/cimgui
+[submodule "cimplot"]
+	path = cimplot
+	url = https://github.com/cimgui/cimplot.git
+[submodule "cimnodes"]
+	path = cimnodes
+	url = https://github.com/cimgui/cimnodes.git
+[submodule "cimguizmo"]
+	path = cimguizmo
+	url = https://github.com/cimgui/cimguizmo.git
