@@ -12,7 +12,7 @@ add_library(cimgui SHARED
     cimgui/imgui/imgui_widgets.cpp)
 
 target_compile_definitions(cimgui PUBLIC IMGUI_DISABLE_OBSOLETE_FUNCTIONS=1)
-
+set_target_properties(cimgui PROPERTIES PREFIX "")
 
 
 add_library(cimplot SHARED
@@ -26,7 +26,7 @@ add_library(cimplot SHARED
     cimplot/implot/implot_items.cpp)
 
 target_include_directories(cimplot PUBLIC cimgui/imgui)
-
+set_target_properties(cimplot PROPERTIES PREFIX "")
 
 
 add_library(cimnodes SHARED
@@ -38,7 +38,7 @@ add_library(cimnodes SHARED
     cimnodes/imnodes/imnodes.cpp)
 
 target_include_directories(cimnodes PUBLIC cimgui/imgui)
-
+set_target_properties(cimnodes PROPERTIES PREFIX "")
 
 
 add_library(cimguizmo SHARED
@@ -50,3 +50,4 @@ add_library(cimguizmo SHARED
     cimguizmo/ImGuizmo/ImGuizmo.cpp)
 
 target_include_directories(cimguizmo PUBLIC cimgui/imgui)
+set_target_properties(cimguizmo PROPERTIES PREFIX "")
