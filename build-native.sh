@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 scriptPath="`dirname \"$0\"`"
-cimguiPath=$scriptPath/cimgui
 
 _CMakeBuildType=Debug
 
@@ -25,8 +24,8 @@ while :; do
     shift
 done
 
-mkdir -p $cimguiPath/build/$_CMakeBuildType
-pushd $cimguiPath/build/$_CMakeBuildType
+mkdir -p $scriptPath/build/$_CMakeBuildType
+pushd $scriptPath/build/$_CMakeBuildType
 cmake ../.. -DCMAKE_BUILD_TYPE=$_CMakeBuildType
 make
 popd

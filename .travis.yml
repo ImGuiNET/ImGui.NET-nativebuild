@@ -7,7 +7,11 @@ deploy:
   provider: releases
   api_key:
     secure: i/+8OvgiHRcQIpv0s+9K+xsKuhmXQWouSoL0jCP2Y6BMnftKYSqhxHsO9N770wIYXSYU0g1Syd03eiBAJ7kVEnGe2FnB4Vz+P3nvBw0RUZV17Vpoyi9X7CHc06botCqqmmXfFGLaY78MHHAYARJjW8pGlZ+htfT+/MM7Tvpoo2GQUnGLN/d9EQVuWA4opdBCsK+MMwQCRAwpLOsZ5skNtZJoYDNJopQBuRTU+SNMR1Wf4On/f59wA+x4fUNpxrP9AFl3M71fWzGnRAKaRrTkHTOufHzzv/cyVihGMFnJY8POGG1fMXJUD6/DWuoUUVr9PV1YKgUPhs4O917Mi+qtykCv9XvVJi9eXMFWuCgIpokbtJXRIqxA4+PlatlthpnSA7tDIJDGRBiguy+JnG0X+KfQD+h+6KKvwO56IRirxbm6bZUEcF4T6g4jmsQo9qkxymAnfKWSiIvZVsUhN4nUcZA5+wQpbKfX17sf72Zl0mMkGB3AKq93rWDvePXw9iYHk3IYL9wZleOtUHshoKgmbSaW2D/whTBaHcI442tpa8HAX2YodN6Aw6rLWu6NccUSi8DT84K8WMf17XJ+lTSaHZ7UFLSHG1MeEi7ayHV83nKO17VrkNz1yRP7KWjDedFUdIjffBaGJPjPoYZGI8FgnXHQ/uKuUvNZidjmBMa/Pa0=
-  file: cimgui/build/Release/cimgui.dylib
+  file:
+    - "build/Release/cimgui.dylib"
+    - "build/Release/cimplot.dylib"
+    - "build/Release/cimnodes.dylib"
+    - "build/Release/cimguizmo.dylib"
   on:
     tags: true
     repo: mellinoe/ImGui.NET-nativebuild

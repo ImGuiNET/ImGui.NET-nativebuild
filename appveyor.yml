@@ -8,12 +8,31 @@ build_script:
 - sh: ./ci-build.sh
 - cmd: call .\ci-build.cmd
 artifacts:
-- path: cimgui/build/Release/cimgui.so
+- path: build/Release/cimgui.so
   name: cimgui.so
-- path: cimgui\build\x64\Release\cimgui.win-x64.dll
+- path: build/Release/cimplot.so
+  name: cimplot.so
+- path: build/Release/cimnodes.so
+  name: cimnodes.so
+- path: build/Release/cimguizmo.so
+  name: cimguizmo.so
+- path: build\x64\Release\cimgui.win-x64.dll
   name: cimgui.win-x64.dll
-- path: cimgui\build\x86\Release\cimgui.win-x86.dll
+- path: build\x64\Release\cimplot.win-x64.dll
+  name: cimplot.win-x64.dll
+- path: build\x64\Release\cimnodes.win-x64.dll
+  name: cimnodes.win-x64.dll
+- path: build\x64\Release\cimguizmo.win-x64.dll
+  name: cimguizmo.win-x64.dll
+- path: build\x86\Release\cimgui.win-x86.dll
   name: cimgui.win-x86.dll
+- path: build\x86\Release\cimplot.win-x86.dll
+  name: cimplot.win-x86.dll
+- path: build\x86\Release\cimnodes.win-x86.dll
+  name: cimnodes.win-x86.dll
+- path: build\x86\Release\cimguizmo.win-x86.dll
+  name: cimguizmo.win-x86.dll
+
 
 deploy:
   release: $(APPVEYOR_REPO_TAG_NAME)
