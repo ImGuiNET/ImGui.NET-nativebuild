@@ -102,3 +102,4 @@ jobs:
             win-x86/*
             JsonFiles/*
             linux-x64/*
+            osx-x64/*
