@@ -1,0 +1,104 @@
+name: CI
+
+# Controls when the workflow will run
+on:
+  create:
+
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ master ]
+
+  pull_request:
+    branches: [ master ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  Build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      - name: Get Submodules
+        run: git submodule update --init --recursive
+
+      - name: Build
+        run:  |
+              if [ "$RUNNER_OS" == "Windows" ]; then
+                ./ci-build.cmd
+              else
+                ./ci-build.sh
+              fi
+        shell: bash
+
+      - name: Upload x64 Release
+        uses: actions/upload-artifact@v2
+        if: matrix.os == 'windows-latest'
+        with:
+          name: win-x64
+          path: cimgui\build\x64\Release\cimgui.dll
+
+      - name: Upload x86 Release
+        uses: actions/upload-artifact@v2
+        if: matrix.os == 'windows-latest'
+        with:
+          name: win-x86
+          path: cimgui\build\x86\Release\cimgui.dll
+
+      - name: Upload Linux Release
+        uses: actions/upload-artifact@v2
+        if: matrix.os == 'ubuntu-latest'
+        with:
+          name: linux-x64
+          path: cimgui/build/Release/cimgui.so
+
+      - name: Upload MacOS Release
+        uses: actions/upload-artifact@v2
+        if: matrix.os == 'macos-latest'
+        with:
+          name: osx-x64
+          path: cimgui/build/Release/cimgui.dylib
+
+      - name: Upload Definitions Json File
+        uses: actions/upload-artifact@v2
+        if: matrix.os == 'windows-latest'
+        with:
+          name: JsonFiles
+          path: cimgui\generator\output\definitions.json
+
+      - name: Upload structs_and_enums Json File
+        uses: actions/upload-artifact@v2
+        if: matrix.os == 'windows-latest'
+        with:
+          name: JsonFiles
+          path: cimgui\generator\output\structs_and_enums.json
+
+  CreateReleaseOnTagCreate:
+    runs-on: ubuntu-latest
+    needs: [Build]
+    if: startsWith(github.ref, 'refs/tags/')
+    steps:
+      - name: Download Artifacts
+        uses: actions/download-artifact@v2
+
+      - name: Rename win-x64 and win-x86 artifacts
+        run: |
+          mv win-x64/cimgui.dll win-x64/cimgui.win-x64.dll
+          mv win-x86/cimgui.dll win-x86/cimgui.win-x86.dll
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            win-x64/*
+            win-x86/*
+            JsonFiles/*
+            linux-x64/*
