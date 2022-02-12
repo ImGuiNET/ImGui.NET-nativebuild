@@ -39,19 +39,33 @@ jobs:
               fi
         shell: bash
 
-      - name: Upload x64 Release
+      - name: Upload win-x64 Release
         uses: actions/upload-artifact@v2
         if: matrix.os == 'windows-latest'
         with:
           name: win-x64
           path: cimgui\build\x64\Release\cimgui.dll
 
-      - name: Upload x86 Release
+      - name: Upload win-x86 Release
         uses: actions/upload-artifact@v2
         if: matrix.os == 'windows-latest'
         with:
           name: win-x86
           path: cimgui\build\x86\Release\cimgui.dll
+
+      - name: Upload win-arm Release
+        uses: actions/upload-artifact@v2
+        if: matrix.os == 'windows-latest'
+        with:
+          name: win-arm
+          path: cimgui\build\ARM\Release\cimgui.dll
+
+      - name: Upload win-arm64 Release
+        uses: actions/upload-artifact@v2
+        if: matrix.os == 'windows-latest'
+        with:
+          name: win-arm64
+          path: cimgui\build\ARM64\Release\cimgui.dll
 
       - name: Upload Linux Release
         uses: actions/upload-artifact@v2
