@@ -13,6 +13,11 @@ on:
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+    inputs:
+      ReleaseType:
+        description: 'Release or Debug'
+        required: true
+        default: 'Release'
 
 jobs:
   Build:
@@ -30,56 +35,56 @@ jobs:
       - name: Get Submodules
         run: git submodule update --init --recursive
 
-      - name: Build
+      - name: Build ${{ github.event.inputs.ReleaseType || 'Release' }}
         run:  |
               if [ "$RUNNER_OS" == "Windows" ]; then
-                ./ci-build.cmd
+                ./ci-build.cmd ${{ github.event.inputs.ReleaseType || 'Release' }}
               else
-                ./ci-build.sh
+                ./ci-build.sh ${{ github.event.inputs.ReleaseType || 'Release' }}
               fi
         shell: bash
 
-      - name: Upload win-x64 Release
+      - name: Upload win-x64 ${{ github.event.inputs.ReleaseType || 'Release' }}
         uses: actions/upload-artifact@v2
         if: matrix.os == 'windows-latest'
         with:
           name: win-x64
-          path: cimgui\build\x64\Release\cimgui.dll
+          path: cimgui\build\x64\${{ github.event.inputs.ReleaseType || 'Release' }}\cimgui.dll
 
-      - name: Upload win-x86 Release
+      - name: Upload win-x86 ${{ github.event.inputs.ReleaseType || 'Release' }}
         uses: actions/upload-artifact@v2
         if: matrix.os == 'windows-latest'
         with:
           name: win-x86
-          path: cimgui\build\x86\Release\cimgui.dll
+          path: cimgui\build\x86\${{ github.event.inputs.ReleaseType || 'Release' }}\cimgui.dll
 
-      - name: Upload win-arm Release
+      - name: Upload win-arm ${{ github.event.inputs.ReleaseType || 'Release' }}
         uses: actions/upload-artifact@v2
         if: matrix.os == 'windows-latest'
         with:
           name: win-arm
-          path: cimgui\build\ARM\Release\cimgui.dll
+          path: cimgui\build\ARM\${{ github.event.inputs.ReleaseType || 'Release' }}\cimgui.dll
 
-      - name: Upload win-arm64 Release
+      - name: Upload win-arm64 ${{ github.event.inputs.ReleaseType || 'Release' }}
         uses: actions/upload-artifact@v2
         if: matrix.os == 'windows-latest'
         with:
           name: win-arm64
-          path: cimgui\build\ARM64\Release\cimgui.dll
+          path: cimgui\build\ARM64\${{ github.event.inputs.ReleaseType || 'Release' }}\cimgui.dll
 
-      - name: Upload Linux Release
+      - name: Upload Linux ${{ github.event.inputs.ReleaseType || 'Release' }}
         uses: actions/upload-artifact@v2
         if: matrix.os == 'ubuntu-latest'
         with:
           name: linux-x64
-          path: cimgui/build/Release/cimgui.so
+          path: cimgui/build/${{ github.event.inputs.ReleaseType || 'Release' }}/cimgui.so
 
-      - name: Upload MacOS Release
+      - name: Upload MacOS ${{ github.event.inputs.ReleaseType || 'Release' }}
         uses: actions/upload-artifact@v2
         if: matrix.os == 'macos-latest'
         with:
           name: osx-x64
-          path: cimgui/build/Release/cimgui.dylib
+          path: cimgui/build/${{ github.event.inputs.ReleaseType || 'Release' }}/cimgui.dylib
 
       - name: Upload Definitions Json File
         uses: actions/upload-artifact@v2
