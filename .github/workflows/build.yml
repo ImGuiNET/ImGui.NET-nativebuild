@@ -49,42 +49,42 @@ jobs:
         if: matrix.os == 'windows-latest'
         with:
           name: win-x64
-          path: cimgui\build\x64\${{ github.event.inputs.ReleaseType || 'Release' }}\cimgui.dll
+          path: cimgui\build\x64\${{ github.event.inputs.ReleaseType || 'Release' }}\*
 
       - name: Upload win-x86 ${{ github.event.inputs.ReleaseType || 'Release' }}
         uses: actions/upload-artifact@v2
         if: matrix.os == 'windows-latest'
         with:
           name: win-x86
-          path: cimgui\build\x86\${{ github.event.inputs.ReleaseType || 'Release' }}\cimgui.dll
+          path: cimgui\build\x86\${{ github.event.inputs.ReleaseType || 'Release' }}\*
 
       - name: Upload win-arm ${{ github.event.inputs.ReleaseType || 'Release' }}
         uses: actions/upload-artifact@v2
         if: matrix.os == 'windows-latest'
         with:
           name: win-arm
-          path: cimgui\build\ARM\${{ github.event.inputs.ReleaseType || 'Release' }}\cimgui.dll
+          path: cimgui\build\ARM\${{ github.event.inputs.ReleaseType || 'Release' }}\*
 
       - name: Upload win-arm64 ${{ github.event.inputs.ReleaseType || 'Release' }}
         uses: actions/upload-artifact@v2
         if: matrix.os == 'windows-latest'
         with:
           name: win-arm64
-          path: cimgui\build\ARM64\${{ github.event.inputs.ReleaseType || 'Release' }}\cimgui.dll
+          path: cimgui\build\ARM64\${{ github.event.inputs.ReleaseType || 'Release' }}\*
 
       - name: Upload Linux ${{ github.event.inputs.ReleaseType || 'Release' }}
         uses: actions/upload-artifact@v2
         if: matrix.os == 'ubuntu-latest'
         with:
           name: linux-x64
-          path: cimgui/build/${{ github.event.inputs.ReleaseType || 'Release' }}/cimgui.so
+          path: cimgui/build/${{ github.event.inputs.ReleaseType || 'Release' }}/*
 
       - name: Upload MacOS ${{ github.event.inputs.ReleaseType || 'Release' }}
         uses: actions/upload-artifact@v2
         if: matrix.os == 'macos-latest'
         with:
           name: osx-x64
-          path: cimgui/build/${{ github.event.inputs.ReleaseType || 'Release' }}/cimgui.dylib
+          path: cimgui/build/${{ github.event.inputs.ReleaseType || 'Release' }}/*
 
       - name: Upload Definitions Json File
         uses: actions/upload-artifact@v2
