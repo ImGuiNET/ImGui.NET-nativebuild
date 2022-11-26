@@ -30,7 +30,7 @@ jobs:
     steps:
 
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Get Submodules
         run: git submodule update --init --recursive
@@ -45,56 +45,56 @@ jobs:
         shell: bash
 
       - name: Upload win-x64 ${{ github.event.inputs.ReleaseType || 'Release' }}
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         if: matrix.os == 'windows-latest'
         with:
           name: win-x64
           path: cimgui\build\x64\${{ github.event.inputs.ReleaseType || 'Release' }}\*
 
       - name: Upload win-x86 ${{ github.event.inputs.ReleaseType || 'Release' }}
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         if: matrix.os == 'windows-latest'
         with:
           name: win-x86
           path: cimgui\build\x86\${{ github.event.inputs.ReleaseType || 'Release' }}\*
 
       - name: Upload win-arm ${{ github.event.inputs.ReleaseType || 'Release' }}
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         if: matrix.os == 'windows-latest'
         with:
           name: win-arm
           path: cimgui\build\ARM\${{ github.event.inputs.ReleaseType || 'Release' }}\*
 
       - name: Upload win-arm64 ${{ github.event.inputs.ReleaseType || 'Release' }}
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         if: matrix.os == 'windows-latest'
         with:
           name: win-arm64
           path: cimgui\build\ARM64\${{ github.event.inputs.ReleaseType || 'Release' }}\*
 
       - name: Upload Linux ${{ github.event.inputs.ReleaseType || 'Release' }}
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         if: matrix.os == 'ubuntu-latest'
         with:
           name: linux-x64
           path: cimgui/build/${{ github.event.inputs.ReleaseType || 'Release' }}/*
 
       - name: Upload MacOS ${{ github.event.inputs.ReleaseType || 'Release' }}
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         if: matrix.os == 'macos-latest'
         with:
           name: osx-x64
           path: cimgui/build/${{ github.event.inputs.ReleaseType || 'Release' }}/*
 
       - name: Upload Definitions Json File
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         if: matrix.os == 'windows-latest'
         with:
           name: JsonFiles
           path: cimgui\generator\output\definitions.json
 
       - name: Upload structs_and_enums Json File
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         if: matrix.os == 'windows-latest'
         with:
           name: JsonFiles
@@ -106,7 +106,7 @@ jobs:
     if: startsWith(github.ref, 'refs/tags/')
     steps:
       - name: Download Artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
 
       - name: Rename win-x64 and win-x86 artifacts
         run: |
