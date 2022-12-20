@@ -112,13 +112,17 @@ jobs:
         run: |
           mv win-x64/cimgui.dll win-x64/cimgui.win-x64.dll
           mv win-x86/cimgui.dll win-x86/cimgui.win-x86.dll
+          mv win-arm64/cimgui.dll win-arm64/cimgui.win-arm64.dll
+          mv win-arm/cimgui.dll win-arm/cimgui.win-arm.dll
 
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            win-x64/*
-            win-x86/*
+            win-x64/cimgui.win-x64.dll
+            win-x86/cimgui.win-x86.dll
+            win-arm64/cimgui.win-arm64.dll
+            win-arm/cimgui.win-arm.dll
             JsonFiles/*
-            linux-x64/*
-            osx-x64/*
+            linux-x64/cimgui.so
+            osx-x64/cimgui.dylib
