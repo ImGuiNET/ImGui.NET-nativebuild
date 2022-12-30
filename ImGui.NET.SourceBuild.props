@@ -1,0 +1,16 @@
+<Project>
+
+  <PropertyGroup>
+    <_ImGuiSourceBuildPkg>$(MSBuildThisFileDirectory)../src/</_ImGuiSourceBuildPkg>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <NativeFileReference Include="$(_ImGuiSourceBuildPkg)cimgui.cpp" />
+    <NativeFileReference Include="$(_ImGuiSourceBuildPkg)imgui/imgui.cpp" />
+    <NativeFileReference Include="$(_ImGuiSourceBuildPkg)imgui/imgui_demo.cpp" />
+    <NativeFileReference Include="$(_ImGuiSourceBuildPkg)imgui/imgui_draw.cpp" />
+    <NativeFileReference Include="$(_ImGuiSourceBuildPkg)imgui/imgui_tables.cpp" />
+    <NativeFileReference Include="$(_ImGuiSourceBuildPkg)imgui/imgui_widgets.cpp" />
+  </ItemGroup>
+
+</Project>
