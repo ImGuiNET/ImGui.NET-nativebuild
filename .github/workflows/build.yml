@@ -43,7 +43,7 @@ jobs:
 
       - name: Build source package
         if: matrix.os == 'windows-latest'
-        run: dotnet pack -c Release .\ImGui.NET.SourceBuild.csproj
+        run: dotnet pack -c Release ImGui.NET.SourceBuild.csproj
         shell: bash
 
       - name: Upload source package
