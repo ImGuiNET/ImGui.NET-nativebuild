@@ -4,12 +4,12 @@
 
 2. git submodule update --remote
 
-3. and then git commit + push.
+3. Update the version in version.json file
+
+4. and then git commit + push.
 
 
 # To Trigger a release push a tag as shown below
-
-1. Update the version in version.json file
 
 2. git tag -a v1.4 -m "my version 1.4"
 
