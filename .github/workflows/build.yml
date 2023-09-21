@@ -117,8 +117,8 @@ jobs:
         run: |
           mv win-x64/cimgui.dll win-x64/cimgui.win-x64.dll
           mv win-x86/cimgui.dll win-x86/cimgui.win-x86.dll
-          mv win-ARM64/cimgui.dll win-arm64/cimgui.win-arm64.dll
-          mv win-ARM/cimgui.dll win-arm/cimgui.win-arm.dll
+          mv win-ARM64/cimgui.dll win-ARM64/cimgui.win-arm64.dll
+          mv win-ARM/cimgui.dll win-ARM/cimgui.win-arm.dll
 
       - name: Release
         uses: softprops/action-gh-release@v1
