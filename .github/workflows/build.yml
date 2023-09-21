@@ -63,10 +63,14 @@ jobs:
       - name: Publish untagged source package to MyGet
         if: matrix.os == 'windows-latest' && github.ref == 'refs/heads/master' && matrix.architecture == 'x64'
         run: dotnet nuget push bin\Packages\Release\*.nupkg -s https://www.myget.org/F/mellinoe/api/v3/index.json --api-key ${{secrets.MYGET_KEY}}
+        # error can be fixed afterwards and job can be re-triggered
+        continue-on-error: true
 
       - name: Publish tagged source package release to nuget.org
         if: matrix.os == 'windows-latest' && startsWith(github.ref, 'refs/tags/') && matrix.architecture == 'x64'
         run: dotnet nuget push bin\Packages\Release\*.nupkg -s https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET_KEY}}
+        # error can be fixed afterwards and job can be re-triggered
+        continue-on-error: true
 
       - name: Build ${{ github.event.inputs.ReleaseType || 'Release' }}
         run:  |
