@@ -46,7 +46,7 @@ jobs:
         if: matrix.os == 'windows-latest'
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 7.0.x
+          dotnet-version: 8.0.x
 
       - name: Build source package
         if: matrix.os == 'windows-latest' && matrix.architecture == 'x64'
