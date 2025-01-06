@@ -33,8 +33,6 @@ jobs:
             architecture: x86
           - os: windows-latest
             architecture: ARM64
-          - os: windows-latest
-            architecture: ARM
 
     steps:
       - uses: actions/checkout@v4
@@ -115,7 +113,6 @@ jobs:
           mv win-x64/cimgui.dll win-x64/cimgui.win-x64.dll
           mv win-x86/cimgui.dll win-x86/cimgui.win-x86.dll
           mv win-ARM64/cimgui.dll win-ARM64/cimgui.win-arm64.dll
-          mv win-ARM/cimgui.dll win-ARM/cimgui.win-arm.dll
 
       - name: Release
         uses: softprops/action-gh-release@v2
@@ -124,7 +121,6 @@ jobs:
             win-x64/cimgui.win-x64.dll
             win-x86/cimgui.win-x86.dll
             win-ARM64/cimgui.win-arm64.dll
-            win-ARM/cimgui.win-arm.dll
             JsonFiles/*
             ubuntu-latest-x64/cimgui.so
             macos-latest-x64/cimgui.dylib
