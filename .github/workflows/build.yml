@@ -88,6 +88,13 @@ jobs:
           name: ${{ matrix.os }}-x64
           path: cimgui/build/${{ github.event.inputs.ReleaseType || 'Release' }}/*
 
+      - name: Upload ${{ matrix.os }} ${{ github.event.inputs.ReleaseType || 'Release' }}
+        uses: actions/upload-artifact@v4
+        if: matrix.os == 'ubuntu-22.04-arm'
+        with:
+          name: ${{ matrix.os }}-arm64
+          path: cimgui/build/${{ github.event.inputs.ReleaseType || 'Release' }}/*
+
       - name: Upload Json Files
         uses: actions/upload-artifact@v4
         if: matrix.os == 'windows-latest' && matrix.architecture == 'x64'
