@@ -26,6 +26,7 @@ jobs:
           - os: windows-latest
             architecture: x86
           - os: windows-latest
+          - os: ubuntu-latest-arm
             architecture: ARM64
 
     steps:
